@@ -1,0 +1,13 @@
+{
+    "tables": {
+        "test_measure": {
+            "columns": {
+                "HR": {
+                    "sdtype": "numerical"
+                }
+            }
+        }
+    },
+    "relationships": [],
+    "METADATA_SPEC_VERSION": "V1"
+}
