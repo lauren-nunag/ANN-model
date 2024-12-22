@@ -1,0 +1,22 @@
+{
+    "tables": {
+        "test_measure_simplified": {
+            "columns": {
+                "Speed": {
+                    "sdtype": "numerical"
+                },
+                "HR": {
+                    "sdtype": "numerical"
+                },
+                "VO2": {
+                    "sdtype": "numerical"
+                },
+                "VCO2": {
+                    "sdtype": "numerical"
+                }
+            }
+        }
+    },
+    "relationships": [],
+    "METADATA_SPEC_VERSION": "V1"
+}
