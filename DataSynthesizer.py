@@ -1,6 +1,6 @@
 import math
 
-import joblib
+
 from sdv.metadata import Metadata
 from sdv.single_table import CTGANSynthesizer
 from sdv.evaluation.single_table import run_diagnostic, evaluate_quality, get_column_plot
