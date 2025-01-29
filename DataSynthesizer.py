@@ -72,7 +72,7 @@ def synthesize(rows):
     plt.xlabel('Speed')
     plt.ylabel('Heart Rate')
     plt.legend()
-    #plt.savefig("plot1.png")  # Save the plot as a PNG
+    plt.savefig("plot1.png")  # Save the plot as a PNG
     plt.close()
 
     excel_file = f"../ANN-model/files/{base_name}{counter}{extension}"
@@ -145,7 +145,18 @@ def splitSheet(excel_file):
 
     print(f"Data has been split and saved to {output_file}")
 
+def merge_sheets(left_file, right_file, fkey):
+    #Load the data
+    Lfile = pd.read_csv(left_file)
+    Rfile = pd.read_csv(right_file)
 
-synthesize(1000)
+    #Merge using foreign key between files
+    merged_data = pd.merge(Lfile, Rfile, on=fkey, how='inner')
+    merged_data.to_csv('merged_data.csv', index=False)
+    print("Merged dataset saved as 'merged_data.csv'")
+
+#merge_sheets('files/test_measure.csv', 'files/subject-info.csv', 'ID_test')
+
+#synthesize(10000)
 #normalize_and_save_params('files/CTGAN_synthetic_data1.xlsx')
-splitSheet('../ANN-model/files/CTGAN_synthetic_data1.xlsx')
+#splitSheet('../ANN-model/files/CTGAN_synthetic_data1.xlsx')
