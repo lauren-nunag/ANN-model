@@ -1,3 +1,4 @@
+import pandas as pd
 from sdv.datasets.local import load_csvs
 from sdv.metadata import Metadata
 from sdv.evaluation.single_table import run_diagnostic, evaluate_quality, get_column_plot
@@ -6,30 +7,22 @@ from sdv.single_table import CTGANSynthesizer
 import matplotlib.pyplot as plt
 
 # Load CSVs from the folder
-datasets = load_csvs(
-    folder_name="C:\\Users\\jspag\\PycharmProjects\\syntheticModelTest\\files\\",
-    read_csv_parameters={
-        'skipinitialspace': True,
-        'encoding': 'utf_8'
-    }
-)
-
-data = datasets['test_measure_simplified']
+data = pd.read_csv('files/test_measure_simplified.csv')
 
 # Automatically detect metadata from the dataframe
-metadata = Metadata.detect_from_dataframe(
-    data=data,
-    table_name='test_measure_simplified'
-)
+# metadata = Metadata.detect_from_dataframe(
+#     data=data,
+#     table_name='test_measure_simplified'
+# )
 
-graph = metadata.visualize()
-graph.format = 'png'  # Set the output format to PNG
-graph.render(filename='metadata_visualization', cleanup=True)  # Saves and removes .dot file
+# graph = metadata.visualize()
+# graph.format = 'png'  # Set the output format to PNG
+# graph.render(filename='metadata_visualization', cleanup=True)  # Saves and removes .dot file
 
 # Save the detected metadata to a file
 metadata_path = "test_measure_simplified_metadata.json"
 
-metadata.save_to_json(metadata_path)
+# metadata.save_to_json(metadata_path)
 print(f"Metadata detected and saved to {metadata_path}")
 
 
@@ -75,8 +68,8 @@ plt.legend()
 plt.savefig("plot.png")  # Save the plot as a PNG
 plt.close()
 
-fig = synthesizer.get_loss_values_plot()
-fig.show()
+#fig = synthesizer.get_loss_values_plot()
+#fig.show()
 
 
 

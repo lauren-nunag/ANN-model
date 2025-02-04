@@ -62,21 +62,33 @@ def synthesize(rows):
         synthetic_data,
         metadata
     )
+    # Generate the overlapping distribution plot using SDV
+    fig = get_column_plot(
+        real_data=data,
+        synthetic_data=synthetic_data,
+        column_name='HR',  # Replace 'HR' with your actual column name
+        metadata=metadata
+    )
 
-    # Scatter plot for original data
-    plt.scatter(data['Speed'], data['HR'], label='Original', alpha=0.5)
+    # Show and save the plot
+    fig.show()
 
-    # Scatter plot for synthetic data
-    plt.scatter(synthetic_data['Speed'], synthetic_data['HR'], label='Synthetic', alpha=0.5)
 
-    plt.xlabel('Speed')
-    plt.ylabel('Heart Rate')
-    plt.legend()
-    plt.savefig("plot1.png")  # Save the plot as a PNG
-    plt.close()
 
-    excel_file = f"../ANN-model/files/{base_name}{counter}{extension}"
-    cleanSheet(excel_file)
+    # # Scatter plot for original data
+    # plt.scatter(data['Speed'], data['HR'], label='Original', alpha=0.5)
+    #
+    # # Scatter plot for synthetic data
+    # plt.scatter(synthetic_data['Speed'], synthetic_data['HR'], label='Synthetic', alpha=0.5)
+    #
+    # plt.xlabel('Speed')
+    # plt.ylabel('Heart Rate')
+    # plt.legend()
+    # plt.savefig("plot1.png")  # Save the plot as a PNG
+    # plt.close()
+    #
+    #excel_file = f"../ANN-model/files/{base_name}{counter}{extension}"
+    #cleanSheet(excel_file)
 
 def cleanSheet(excel_file):
     data = pd.read_excel(excel_file)
@@ -115,7 +127,7 @@ def normalize_and_save_params(excel_file):
 
 def splitSheet(excel_file):
     # Load the Excel file
-    file_path = '../ANN-model/files/CTGAN_synthetic_data1.xlsx'  # Replace with your file path
+    file_path = excel_file  # Replace with your file path
     df = pd.read_excel(excel_file)
 
     # Define split indices
@@ -157,6 +169,11 @@ def merge_sheets(left_file, right_file, fkey):
 
 #merge_sheets('files/test_measure.csv', 'files/subject-info.csv', 'ID_test')
 
-#synthesize(10000)
+def csv_to_excel(csv_file, excel_path):
+    df = pd.read_csv(csv_file)
+    df.to_excel(excel_path, index=False, engine="openpyxl")
+
+synthesize(10000)
 #normalize_and_save_params('files/CTGAN_synthetic_data1.xlsx')
-#splitSheet('../ANN-model/files/CTGAN_synthetic_data1.xlsx')
+#csv_to_excel('files/merged_data.csv', 'files/merged_data.xlsx')
+#splitSheet('files/merged_data.xlsx')
